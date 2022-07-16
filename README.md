@@ -1,4 +1,4 @@
-[Play the Game on GitHub Pages](https://learnwebcode.github.io/react-dog-game/)
+# [Play the Game on GitHub Pages](https://learnwebcode.github.io/react-dog-game/)
 
 The `npm run build` task will create a folder named dist, but GitHub Pages would need the folder to be named "docs" instead. Instead of manually changing the folder name, you can [configure Vite to use a different build output folder](https://vitejs.dev/config/build-options.html#build-outdir).
 
