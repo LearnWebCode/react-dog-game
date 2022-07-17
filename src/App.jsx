@@ -20,7 +20,11 @@ function ourReducer(draft, action) {
       if (!action.value) draft.highScore = 0
       return
     case "decreaseTime":
-      draft.timeRemaining--
+      if (draft.timeRemaining <= 0) {
+        draft.playing = false
+      } else {
+        draft.timeRemaining--
+      }
       return
     case "stopPlaying":
       draft.playing = false
@@ -120,14 +124,6 @@ function App() {
       }
     }
   }, [state.playing])
-
-  useEffect(() => {
-    if (state.playing && state.timeRemaining <= 0) {
-      console.log("Interval cleared from time ran out.")
-      clearInterval(timer.current)
-      dispatch({ type: "stopPlaying" })
-    }
-  }, [state.timeRemaining])
 
   useEffect(() => {
     const reqController = new AbortController()
