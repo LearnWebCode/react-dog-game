@@ -109,20 +109,25 @@ function App() {
 
   useEffect(() => {
     if (state.playing) {
+      console.log("Interval created.")
       timer.current = setInterval(() => {
         dispatch({ type: "decreaseTime" })
       }, 1000)
 
-      if (state.timeRemaining <= 0) {
-        clearInterval(timer.current)
-        dispatch({ type: "stopPlaying" })
-      }
-
       return () => {
+        console.log("Interval cleared from cleanup.")
         clearInterval(timer.current)
       }
     }
-  }, [state.playing, state.timeRemaining])
+  }, [state.playing])
+
+  useEffect(() => {
+    if (state.playing && state.timeRemaining <= 0) {
+      console.log("Interval cleared from time ran out.")
+      clearInterval(timer.current)
+      dispatch({ type: "stopPlaying" })
+    }
+  }, [state.timeRemaining])
 
   useEffect(() => {
     const reqController = new AbortController()
