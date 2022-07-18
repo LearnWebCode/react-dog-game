@@ -14,6 +14,7 @@ function onlyUniqueBreeds(pics) {
 }
 
 function ourReducer(draft, action) {
+  if (draft.points > draft.highScore) draft.highScore = draft.points
   switch (action.type) {
     case "receiveHighScore":
       draft.highScore = action.value
@@ -26,10 +27,6 @@ function ourReducer(draft, action) {
         draft.timeRemaining--
       }
       return
-    case "stopPlaying":
-      draft.playing = false
-      if (draft.points > draft.highScore) draft.highScore = draft.points
-      return
     case "guessAttempt":
       if (!draft.playing) return
       if (action.value === draft.currentQuestion.answer) {
@@ -39,7 +36,6 @@ function ourReducer(draft, action) {
         draft.strikes++
         if (draft.strikes >= 3) {
           draft.playing = false
-          if (draft.points > draft.highScore) draft.highScore = draft.points
         }
       }
       return
