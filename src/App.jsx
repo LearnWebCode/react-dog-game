@@ -15,6 +15,7 @@ function onlyUniqueBreeds(pics) {
 
 function ourReducer(draft, action) {
   if (draft.points > draft.highScore) draft.highScore = draft.points
+
   switch (action.type) {
     case "receiveHighScore":
       draft.highScore = action.value
@@ -115,7 +116,7 @@ function App() {
       }, 1000)
 
       return () => {
-        console.log("Interval cleared from cleanup.")
+        console.log("interval cleared from cleanup")
         clearInterval(timer.current)
       }
     }
